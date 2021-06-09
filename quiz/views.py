@@ -14,6 +14,8 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework import parsers
 from django.utils import timezone
+from django.middleware import csrf
+from rest_framework import viewsets
 from quiz.serializers import (
     Subject, Question,
     QuestionSerializer, SubjectSerializer,
@@ -58,34 +60,35 @@ class PaperViews(ListAPIView):
     serializer_class = PaperSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-class LoginView(views.APIView):
-    def post(self, request):
-        serializer = LoginSerializer(data=request.data)
-        if serializer.is_valid():
-            username = serializer.validated_data.get('username', None)
-            password = serializer.validated_data.get('password', None)
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                try:
-                    t = Token.objects.get(user=user)
-                except Token.DoesNotExist:
-                    t = Token.objects.create(user=user)
-                auth_token = t.key
-                return Response({'message': "You're logged in.", 'token': auth_token})
-            else:
-                return Response({'error': "Correct credentials were not provided"}, status=status.HTTP_400_BAD_REQUEST)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# class LoginView(views.APIView):
+#     def post(self, request):
+#         print(csrf.get_token(request))
+#         serializer = LoginSerializer(data=request.data)
+#         if serializer.is_valid():
+#             username = serializer.validated_data.get('username', None)
+#             password = serializer.validated_data.get('password', None)
+#             user = authenticate(username=username, password=password)
+#             if user is not None:
+#                 login(request, user)
+#                 try:
+#                     t = Token.objects.get(user=user)
+#                 except Token.DoesNotExist:
+#                     t = Token.objects.create(user=user)
+#                 auth_token = t.key
+#                 return Response({'message': "You're logged in.", 'token': auth_token})
+#             else:
+#                 return Response({'error': "Correct credentials were not provided"}, status=status.HTTP_400_BAD_REQUEST)
+#         else:
+#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class LogoutView(views.APIView):
-    def get(self, request):
-        if request.user.is_authenticated:
-            logout(request)
-            return Response({'message': "You're logout"})
-        else:
-            return Response({'error': 'Not Logged In.'})
+# class LogoutView(views.APIView):
+#     def get(self, request):
+#         if request.user.is_authenticated:
+#             logout(request)
+#             return Response({'message': "You're logout"})
+#         else:
+#             return Response({'error': 'Not Logged In.'})
 
 class CreateUserView(CreateAPIView):
     serializer_class = UserSerializer
