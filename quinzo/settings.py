@@ -116,9 +116,7 @@ USE_L10N = True
 
 USE_TZ = False
 
-STATIC_URL = '/static/'
 
-STATIC_ROOT = BASE_DIR / 'static/'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -131,5 +129,12 @@ REST_FRAMEWORK = {
 #     ]
 # }
 
+
+
+
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
