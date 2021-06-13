@@ -33,6 +33,16 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
+SWAGGER_SETTINGS ={
+    'SECURITY_DEFINITIONS':{
+        'Auth token eg [Bearer {JWT}]':{
+            'type':'apiKey',
+            'name':'Authorization',
+            'in':'header',
+        }
+    }
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
