@@ -32,13 +32,13 @@ class QuestionViewSet(viewsets.ModelViewSet):
     serializer_class = QuestionSerializer
     queryset = Question.objects.all()
     # authentication_classes = [authentication.TokenAuthentication, authentication.BasicAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
     # pagination_class = QuestionPage
 
 
 
 class ByQuestion(views.APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
     def get(self, request, id):
         try:
             subject = Subject.objects.get(pk=id)
@@ -52,13 +52,13 @@ class ByQuestion(views.APIView):
 class SubjectViews(ListAPIView):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
     parser_classes = [parsers.MultiPartParser]
 
 class PaperViews(ListAPIView):
     queryset = Paper.objects.all()
     serializer_class = PaperSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
 # class LoginView(views.APIView):
 #     def post(self, request):
@@ -96,7 +96,7 @@ class CreateUserView(CreateAPIView):
     permission_classes = [permissions.AllowAny]
 
 class QuizView(views.APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
     def get(self, request, test_id):
         test = get_object_or_404(Quiz, pk=test_id)
         current_time = timezone.now()
@@ -131,7 +131,7 @@ class TimeView(views.APIView):
         return Response({'time': str(current_time)})
 
 class SubjectByPaper(views.APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, paper_id):
         paper = get_object_or_404(Paper, pk=paper_id)
