@@ -39,14 +39,6 @@ class UserSerializer(serializers.ModelSerializer):
             first_name = validated_data.get('first_name', ''),
             last_name = validated_data.get('last_name', '')
         )
-    
-
-        
-class QuizSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Quiz
-        fields = '__all__'
-        # depth = 1
 
 class QuizResultSerializer(serializers.ModelSerializer):
     # user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
@@ -94,3 +86,13 @@ class QuestionSerializer(serializers.ModelSerializer):
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(required=True)
     password = serializers.CharField(required=True)
+
+    
+
+        
+class QuizSerializer(serializers.ModelSerializer):
+    questions = QuestionSerializer(many=True)
+    class Meta:
+        model = Quiz
+        fields = '__all__'
+        # depth = 1
