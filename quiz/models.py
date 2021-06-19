@@ -21,7 +21,7 @@ class Question(models.Model):
     OPTIONS = (
         ('option_a', 'option_a'), ('option_b', 'option_b'), ('option_c', 'option_c'), ('option_d', 'option_d')
     )
-    title = models.CharField( unique=True)
+    title = models.TextField( unique=True)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='questions')
     marks = models.PositiveIntegerField(default=1)
     option_a = models.CharField(max_length=100)    
