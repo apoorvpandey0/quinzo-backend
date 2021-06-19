@@ -15,6 +15,7 @@ from django.conf.urls import url
 
 router = routers.DefaultRouter()
 router.register('question', quiz_views.QuestionViewSet)
+router.register('test', quiz_views.QuizViewSet,basename="hi")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,7 +28,7 @@ urlpatterns = [
     # path('login', quiz_views.LoginView.as_view(), name='login'),
     # path('logout', quiz_views.LogoutView.as_view(), name='logout'),
     path('signup', quiz_views.CreateUserView.as_view(), name='signup'),
-    path('test/<int:test_id>', quiz_views.QuizView.as_view(), name='view-test'),
+   #  path('test/', quiz_views.QuizView.as_view(), name='view-test'),
     path('time', quiz_views.TimeView.as_view(), name='time'),
     path('result', quiz_views.QuizResultView.as_view(), name='quiz-result'),
 ]

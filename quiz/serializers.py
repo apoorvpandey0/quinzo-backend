@@ -20,7 +20,7 @@ class UserSerializer(serializers.ModelSerializer):
     def validate(self, data):
         branches = ['IT']
         if len(data['username']) != 13:
-            raise serializers.ValidationError("Please enter a valid Enrollment no. eg. 0101I1910XX")
+            raise serializers.ValidationError("Please enter a valid Enrollment no. eg. 0101IT910XX")
         if "0101" not in data['username'][0:4]:
             raise serializers.ValidationError("The registrations are only open to the students of UIT RGPV")
         if data['username'][4:6] not in branches:
@@ -46,7 +46,7 @@ class QuizSerializer(serializers.ModelSerializer):
     class Meta:
         model = Quiz
         fields = '__all__'
-        depth = 1
+        # depth = 1
 
 class QuizResultSerializer(serializers.ModelSerializer):
     # user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())

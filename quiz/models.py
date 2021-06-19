@@ -45,6 +45,7 @@ class Quiz(models.Model):
     starting_time = models.DateTimeField()
     ending_time = models.DateTimeField()
     questions = models.ManyToManyField(Question)
+    archived = models.BooleanField(default = False)
 
     def get_total_marks(self):
         marks = 0

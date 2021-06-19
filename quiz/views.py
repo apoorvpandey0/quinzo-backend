@@ -95,17 +95,24 @@ class CreateUserView(CreateAPIView):
     queryset = User.objects.all()
     permission_classes = [permissions.AllowAny]
 
-class QuizView(views.APIView):
-    # permission_classes = [permissions.IsAuthenticated]
-    def get(self, request, test_id):
-        test = get_object_or_404(Quiz, pk=test_id)
-        current_time = timezone.now()
 
-        if current_time >= test.starting_time and current_time <= test.ending_time:
-            serilizer = QuizSerializer(instance=test)
-            return Response(serilizer.data)
-        else:
-            return Response({'error': 'The Test Does\'t started or has been ended.'}, status=status.HTTP_400_BAD_REQUEST)
+class QuizViewSet(viewsets.ModelViewSet):
+    serializer_class = QuizSerializer
+    queryset = Quiz.objects.all()
+    filterset_fields = ['archived']
+
+
+# class QuizView(views.APIView):
+#     # permission_classes = [permissions.IsAuthenticated]
+#     def get(self, request, test_id):
+#         test = get_object_or_404(Quiz, pk=test_id)
+#         current_time = timezone.now()
+
+#         if current_time >= test.starting_time and current_time <= test.ending_time:
+#             serilizer = QuizSerializer(instance=test)
+#             return Response(serilizer.data)
+#         else:
+#             return Response({'error': 'The Test Does\'t started or has been ended.'}, status=status.HTTP_400_BAD_REQUEST)
         
 class QuizResultView(views.APIView):
     permission_classes = [permissions.IsAuthenticated]
