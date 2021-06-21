@@ -117,7 +117,7 @@ class QuizViewSet(viewsets.ModelViewSet):
 class QuizResultView(views.APIView):
     permission_classes = [permissions.IsAuthenticated]
     def get(self, request):
-        queryset = QuizResult.objects.all()
+        queryset = QuizResult.objects.filter(user = request.user)
         serializer = QuizResultSerializer(queryset, many=True)
         return Response(serializer.data)
 
