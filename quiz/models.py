@@ -62,6 +62,7 @@ class QuizResult(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     marks = models.PositiveIntegerField(default=0)
     time = models.DateTimeField(auto_now_add=True)
-
+    class Meta:
+        unique_together = ('user', 'quiz',)
     def __str__(self):
         return self.user.username + self.quiz.title

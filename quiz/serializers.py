@@ -46,9 +46,9 @@ class QuizResultSerializer(serializers.ModelSerializer):
         model = QuizResult
         fields = '__all__'
     
-    def create(self, validated_data):
-        # user = CurrentUserDefault()
-        return QuizResult(**validated_data)
+    # def create(self, validated_data):
+    #     # user = CurrentUserDefault()
+    #     return QuizResult(**validated_data)
 
 class SubjectSerializer(serializers.ModelSerializer):
     class Meta:
