@@ -18,7 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
         ]
 
     def validate(self, data):
-        branches = ['IT']
+        branches = ['IT','it']
         if len(data['username']) != 12:
             raise serializers.ValidationError("Please enter a valid Enrollment no. eg. 0101IT910XX")
         if "0101" not in data['username'][0:4]:
