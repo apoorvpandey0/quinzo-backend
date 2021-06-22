@@ -100,6 +100,7 @@ class QuizViewSet(viewsets.ModelViewSet):
     serializer_class = QuizSerializer
     queryset = Quiz.objects.all()
     filterset_fields = ['archived']
+    permission_classes = [permissions.IsAuthenticated]
 
 
 # class QuizView(views.APIView):

@@ -92,7 +92,19 @@ class LoginSerializer(serializers.Serializer):
         
 class QuizSerializer(serializers.ModelSerializer):
     questions = QuestionSerializer(many=True)
+    attempted = serializers.SerializerMethodField()
+
     class Meta:
         model = Quiz
         fields = '__all__'
         # depth = 1
+
+    def get_attempted(self, obj):
+        print(self)
+        print(obj)
+        request = self.context.get('request', None)
+        if request:
+            if (QuizResult.objects.filter(user=request.user,quiz = obj)):
+                return True
+            else:
+                return False
