@@ -18,12 +18,12 @@ class UserSerializer(serializers.ModelSerializer):
         ]
 
     def validate(self, data):
-        branches = ['IT','it']
+        branches = ['IT']
         if len(data['username']) != 12:
             raise serializers.ValidationError("Please enter a valid Enrollment no. eg. 0101IT910XX")
         if "0101" not in data['username'][0:4]:
             raise serializers.ValidationError("The registrations are only open to the students of UIT RGPV")
-        if data['username'][4:6] not in branches:
+        if (data['username'][4:6]).upper() not in branches:
             raise serializers.ValidationError("The registrations are only open to the students IT department")
         try:
             password_validation.validate_password(data['password'])
