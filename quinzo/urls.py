@@ -20,17 +20,17 @@ router.register('test', quiz_views.QuizViewSet,basename="hi")
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('question/by_subject/<int:id>', quiz_views.ByQuestion.as_view(), name='by-question'),
-    path('subjects', quiz_views.SubjectViews.as_view(), name='subjects'),
-    path('papers', quiz_views.PaperViews.as_view(), name='papers'),
+    path('subjects/', quiz_views.SubjectViews.as_view(), name='subjects'),
+    path('papers/', quiz_views.PaperViews.as_view(), name='papers'),
     path('subject/by_paper/<int:paper_id>', quiz_views.SubjectByPaper.as_view(), name='subject-by-papers'),
     path('login/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('login/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     # path('login', quiz_views.LoginView.as_view(), name='login'),
     # path('logout', quiz_views.LogoutView.as_view(), name='logout'),
-    path('signup', quiz_views.CreateUserView.as_view(), name='signup'),
+    path('signup/', quiz_views.CreateUserView.as_view(), name='signup'),
    #  path('test/', quiz_views.QuizView.as_view(), name='view-test'),
-    path('time', quiz_views.TimeView.as_view(), name='time'),
-    path('result', quiz_views.QuizResultView.as_view(), name='quiz-result'),
+    path('time/', quiz_views.TimeView.as_view(), name='time'),
+    path('result/', quiz_views.QuizResultView.as_view(), name='quiz-result'),
 ]
 
 # Url's configuration for static, media, and router url's

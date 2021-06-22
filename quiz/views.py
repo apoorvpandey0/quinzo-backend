@@ -123,7 +123,7 @@ class QuizResultView(views.APIView):
 
     def post(self, request):
         data = dict(request.data)
-        # print(data)
+        print(data)
         for key, val in data.items():
             data[key] = val[0]
         data['user'] = request.user.pk
